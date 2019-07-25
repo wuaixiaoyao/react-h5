@@ -29,6 +29,7 @@
     "file-loader": "2.0.0",
     "fs-extra": "7.0.1",
     "html-webpack-plugin": "4.0.0-alpha.2",
+    "http-proxy-middleware": "^0.19.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.2",
@@ -62,10 +63,12 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "start:test": "export NODE_ENV='test' && node scripts/start.js",
+    "start:uat": "export NODE_ENV='uat' && node scripts/start.js",
     "build": "npm run clean && node scripts/build.js",
     "test": "node scripts/test.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "clean":"rimraf ./build"
+    "clean": "rimraf ./build"
   },
   "eslintConfig": {
     "extends": "react-app"
