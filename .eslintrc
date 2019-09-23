@@ -1,0 +1,39 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "jsx-a11y/anchor-is-valid": [
+      "warring",
+      {
+        "aspects": [
+          "preferButton"
+        ]
+      }
+    ],
+    "no-script-url": 0,
+    "no-control-regex": 0,
+    "quotes": [
+      "warn",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
+    ],
+    "no-console": [
+      "off"
+    ],
+    "indent": [
+      "error",
+      2
+    ]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
+  }
+}
