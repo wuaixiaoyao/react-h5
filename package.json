@@ -70,7 +70,7 @@
     "test": "node scripts/test.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "clean": "rimraf ./build",
-    "lint": "eslint --fix --ext .js,.jsx src"
+    "lint": "eslint --fix --ext .js,.jsx src config"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,4 +1,4 @@
-'use strict';
+
 
 const fs = require('fs');
 const path = require('path');
@@ -103,7 +103,7 @@ module.exports = function(webpackEnv) {
               viewportHeight:667, // (Number) The height of the viewport.
               unitPrecision: 3, // (Number) The decimal numbers to allow the REM units to grow to.
               viewportUnit: 'vw', // (String) Expected units.
-              selectorBlackList: ['.ignore',".hr-line",'.hairlines',"swiper-wrapper","swiper-img","active-swiper-img","swiper-item","swiper-content"], // (Array) The selectors to ignore and leave as px.
+              selectorBlackList: ['.ignore','.hr-line','.hairlines','swiper-wrapper','swiper-img','active-swiper-img','swiper-item','swiper-content'], // (Array) The selectors to ignore and leave as px.
               minPixelValue: 0, // (Number) Set the minimum pixel value to replace.
               mediaQuery: false // (Boolean) Allow px to be converted in media queries.
             }),
@@ -176,9 +176,9 @@ module.exports = function(webpackEnv) {
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
         ? info =>
-            path
-              .relative(paths.appSrc, info.absoluteResourcePath)
-              .replace(/\\/g, '/')
+          path
+            .relative(paths.appSrc, info.absoluteResourcePath)
+            .replace(/\\/g, '/')
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
@@ -234,13 +234,13 @@ module.exports = function(webpackEnv) {
             parser: safePostCssParser,
             map: shouldUseSourceMap
               ? {
-                  // `inline: false` forces the sourcemap to be output into a
-                  // separate file
-                  inline: false,
-                  // `annotation: true` appends the sourceMappingURL to the end of
-                  // the css file, helping the browser find the sourcemap
-                  annotation: true,
-                }
+                // `inline: false` forces the sourcemap to be output into a
+                // separate file
+                inline: false,
+                // `annotation: true` appends the sourceMappingURL to the end of
+                // the css file, helping the browser find the sourcemap
+                annotation: true,
+              }
               : false,
           },
         }),
@@ -278,7 +278,7 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
-        "@":paths.appSrc
+        '@':paths.appSrc
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -310,7 +310,7 @@ module.exports = function(webpackEnv) {
         {
           test: /\.(js|mjs|jsx)$/,
           enforce: 'pre',
-          use: [
+          use: !isEnvProduction ? [
             {
               options: {
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
@@ -319,7 +319,7 @@ module.exports = function(webpackEnv) {
               },
               loader: require.resolve('eslint-loader'),
             },
-          ],
+          ] :[],
           include: paths.appSrc,
         },
         {
@@ -492,20 +492,19 @@ module.exports = function(webpackEnv) {
           },
           isEnvProduction
             ? {
-                minify: {
-                  removeComments: true,
-                  collapseWhitespace: true,
-                  removeRedundantAttributes: true,
-                  useShortDoctype: true,
-                  removeEmptyAttributes: true,
-                  removeStyleLinkTypeAttributes: true,
-                  keepClosingSlash: true,
-                  minifyJS: true,
-                  minifyCSS: true,
-                  minifyURLs: true,
-                },
-              }
-            : undefined
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              },
+            } : undefined
         )
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
