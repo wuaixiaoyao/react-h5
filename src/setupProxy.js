@@ -4,22 +4,22 @@
  * @Description:
 */
 const proxy = require('http-proxy-middleware');
-const NODE_ENV = process.env.NODE_ENV||"development";
+const NODE_ENV = process.env.NODE_ENV||'development';
 const apiMap = {
-    development:"http://10.250.90.23:4000",
-    test:"http://test.api.com",
-    uat:"http://uat.api.com",
-    pro:"http://pro.api.com"
+  development:'http://10.250.90.23:4000',
+  test:'http://test.api.com',
+  uat:'http://uat.api.com',
+  pro:'http://pro.api.com'
 }
 const envApi = apiMap[NODE_ENV];
 module.exports = function (app) {
-    app.use('/api', proxy({
-        target: envApi, // target host
-        changeOrigin: true,
-        ws: false,
-        pathRewrite: {
-            '^/api': '',
-        }
-    }));
+  app.use('/api', proxy({
+    target: envApi, // target host
+    changeOrigin: true,
+    ws: false,
+    pathRewrite: {
+      '^/api': '',
+    }
+  }));
 };
 

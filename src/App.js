@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router';
 import logo from './logo.svg';
-import './App.scss';
 class App extends Component {
   componentDidMount(){
-    fetch("/api/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA").then(res=>{
+    fetch('/api/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA').then(res=>{
 
     })
   }

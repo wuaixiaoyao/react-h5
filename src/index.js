@@ -1,60 +1,73 @@
-import React ,{Component}from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route,browserHistory } from 'react-router';
+import { BrowserRouter  } from 'react-router-dom';
 import './index.css';
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
-class App extends Component{
-    render(){
-        return (
-            <div>
-                <h1>App</h1>
-                <ul>
-                    {/*<li><Link to="/about">About</Link></li>*/}
-                    {/*<li><Link to="/inbox">Inbox</Link></li>*/}
-                </ul>
-                {this.props.children}
-            </div>
-        )
-    }
+import { renderRoutes } from 'react-router-config';
+const Root = ({ route }) => {
+  return <div>
+    <h1>Root</h1>
+    {renderRoutes(route.routes)}
+  </div>
 }
 
+const Home = ({ route }) => (
+  <div>
+    <h2>我是Home页</h2>
+  </div>
+);
 
+const Child = ({ route }) => (
+  <div>
+    <h2>Child</h2>
+     child routes won't render without this
+    {renderRoutes(route.routes, { someProp: 'these extra props are optional' })}
+  </div>
+);
 
-class About extends Component{
-    render(){
-        return <h3>About</h3>
-    }
-}
+const GrandChild = ( props ) => {//孙子组件
+  let { route ,someProp ,match ,location} = props;
+  let { params : { id }} = match;
+  debugger
+  return <div>
+    <h3>Grand Child id { id }</h3>
+    <div>{someProp}</div>
+  </div>
+};
+const routes = [
+  {
+    component: Root,
+    routes: [
+      {
+        path: '/',
+        exact: true,
+        component: Home
+      },
+      {
+        path: '/child',
+        component: Child,
+        routes: [
+          {
+            path: '/',
+            component: GrandChild
+          },
+          {
+            path: '/:id/grand-child',
+            component: GrandChild
+          }
+        ]
+      }
+    ]
+  }
+];
 
-class Inbox extends Component{
-    render(){
-        return (
-            <div>
-                <h2>Inbox</h2>
-                {this.props.children || "Welcome to your Inbox"}
-            </div>
-        )
-    }
-}
-
-class Message extends Component{
-    render(){
-        return <h3>
-            {/*Message {this.props.params.id}*/}
-        </h3>
-    }
-}
-ReactDOM.render((
-    <Router history={browserHistory}>
-        <Route path="/" component={App}>
-            <Route path="about" component={About} />
-            <Route path="inbox" component={Inbox}>
-                {/*<Route path="messages/:id" component={Message} />*/}
-            </Route>
-        </Route>
-    </Router>
-), document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    {/* kick it all off with the root route */}
+    {renderRoutes(routes)}
+  </BrowserRouter>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

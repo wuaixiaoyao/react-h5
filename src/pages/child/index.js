@@ -1,14 +1,14 @@
 /**
  * @author wuaixiaoyao
  * @date 2019/9/23
- * @Description:
+ * @Description:子页面
 */
 import React ,{Component} from 'react';
-export default class Home extends Component {
+export default class GrandChild extends Component {
   render () {
     //
     return <div>
-        home 页面
+        孙子页面
 
     </div>
   }
