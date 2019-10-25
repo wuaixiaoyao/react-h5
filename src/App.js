@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import classNames from 'classnames';
 class App extends Component {
   componentDidMount(){
     fetch('/api/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA').then(res=>{
@@ -10,7 +10,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>

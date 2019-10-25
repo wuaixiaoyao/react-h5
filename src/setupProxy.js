@@ -4,14 +4,14 @@
  * @Description:
 */
 const proxy = require('http-proxy-middleware');
-const NODE_ENV = process.env.NODE_ENV||'development';
+const API_ENV = process.env.API_ENV||'development';
 const apiMap = {
   development:'http://10.250.90.23:4000',
   test:'http://test.api.com',
   uat:'http://uat.api.com',
   pro:'http://pro.api.com'
 }
-const envApi = apiMap[NODE_ENV];
+const envApi = apiMap[API_ENV];
 module.exports = function (app) {
   app.use('/api', proxy({
     target: envApi, // target host
