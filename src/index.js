@@ -1,9 +1,10 @@
 import React , { lazy , Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter  } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import Button from './baseUI/button'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { renderRoutes } from 'react-router-config';
 const getWrapperComponent = (Component, fallback = null) => {//装饰路由组件
   return  props => {
     return (
@@ -21,6 +22,7 @@ const GrandChild = getWrapperComponent(lazy(() => import('./pages/grandChild/ind
 const Root = ({ route }) => {
   return <div>
     <h1>根组件</h1>
+    <Button type={'primary'}>test</Button>
     {renderRoutes(route.routes)}
   </div>
 }
