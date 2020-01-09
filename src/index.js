@@ -2,9 +2,11 @@ import React , { lazy , Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter  } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import ErrorBoundary from './errorBoundary'
 import Button from './baseUI/button'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+let fundebugRevideo = require('fundebug-revideo');
 const getWrapperComponent = (Component, fallback = null) => {//装饰路由组件
   return  props => {
     return (
@@ -20,11 +22,14 @@ const GrandChild = getWrapperComponent(lazy(() => import('./pages/grandChild/ind
 
 
 const Root = ({ route }) => {
-  return <div>
-    <h1>根组件</h1>
-    <Button type={'primary'}>test</Button>
-    {renderRoutes(route.routes)}
-  </div>
+  return <ErrorBoundary>
+    <div>
+
+      <h1>根组件</h1>
+      <Button type={'primary'}>test</Button>
+      {renderRoutes(route.routes)}
+    </div>
+  </ErrorBoundary>
 }
 
 

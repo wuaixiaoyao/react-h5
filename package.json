@@ -58,7 +58,7 @@
     "react-router-dom": "^5.1.2",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
-    "source-map-explorer": "^1.7.0",
+    "source-map-explorer": "^2.1.1",
     "style-loader": "0.23.1",
     "styled-components": "^4.4.1",
     "terser-webpack-plugin": "1.2.2",
@@ -136,6 +136,8 @@
   },
   "devDependencies": {
     "cross-env": "^6.0.3",
+    "fundebug-javascript": "^2.0.0",
+    "fundebug-revideo": "^0.6.1",
     "nodemon": "^1.19.4",
     "rimraf": "^2.6.3"
   }
