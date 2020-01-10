@@ -5,8 +5,9 @@
  * @Description:
 */
 import React , { Component }from 'react';
-import { Route ,withRouter } from 'react-router'
-import { } from 'react-router-dom'
+import { Route , withRouter, } from 'react-router'
+import { matchRoutes } from 'react-router-dom'
+import  routes from '../'
 //todo;待完善
 const loadBranchData = (location) => {
   const branch = matchRoutes(routes, location.pathname)
