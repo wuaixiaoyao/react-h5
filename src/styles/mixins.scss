@@ -1,0 +1,284 @@
+/**
+ * @author wuaixiaoyao
+ * @date 2019/11/5
+ * @Description:
+*/
+@mixin text-overflow() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+@mixin text-overflow-multi($line: 3, $bg: #fff) {
+  position: relative;
+  max-height: $line * 1.5em;
+  margin-right: -1em;
+  padding-right: 1em;
+  overflow: hidden;
+  line-height: 1.5em;
+  text-align: justify;
+  &::before {
+    position: absolute;
+    right: 14px;
+    bottom: 0;
+    padding: 0 1px;
+    background: $bg;
+    content: '...';
+  }
+  &::after {
+    position: absolute;
+    right: 14px;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+    content: '';
+  }
+}
+// 1 像素
+$border-color-base: #ddd;
+@mixin scale-hairline-common($color, $top, $right, $bottom, $left){
+  content: '';
+  position: absolute;
+  background-color: $color;
+  display: block;
+  z-index: 1;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+@mixin hairline($direction, $color: $border-color-base, $radius: 0) {
+  @if ($direction == 'top') {
+    border-top: 1PX solid $color;
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        position: relative;
+        border-top: none;
+        &::before {
+          @include scale-hairline-common($color, 0, auto, auto, 0);
+          width: 100%;
+          height: 1PX;
+          transform-origin: 50% 50%;
+          transform: scaleY(0.5);
+          @media (min-resolution: 3dppx) {
+            transform: scaleY(0.33);
+          }
+        }
+      }
+    }
+  }
+  @if ($direction == 'right') {
+    border-right: 1PX solid $color;
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        position: relative;
+        border-right: none;
+        &::after {
+          @include scale-hairline-common($color, 0, 0, auto, auto);
+          width: 1PX;
+          height: 100%;
+          background: $color;
+          transform-origin: 100% 50%;
+          transform: scaleX(0.5);
+          @media (min-resolution: 3dppx) {
+            transform: scaleX(0.33);
+          }
+        }
+      }
+    }
+  }
+  @if ($direction == 'bottom') {
+    border-bottom: 1PX solid $color;
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        position: relative;
+        border-bottom: none;
+        &::after {
+          @include scale-hairline-common($color, auto, auto, 0, 0);
+          width: 100%;
+          height: 1PX;
+          transform-origin: 50% 100%;
+          transform: scaleY(0.5);
+          @media (min-resolution: 3dppx) {
+            transform: scaleY(0.33);
+          }
+        }
+      }
+    }
+  }
+  @if ($direction == 'left') {
+    border-left: 1PX solid $color;
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        position: relative;
+        border-left: none;
+        &::before {
+          @include scale-hairline-common($color, 0, auto, auto, 0);
+          width: 1PX;
+          height: 100%;
+          transform-origin: 100% 50%;
+          transform: scaleX(0.5);
+          @media (min-resolution: 3dppx) {
+            transform: scaleX(0.33);
+          }
+        }
+      }
+    }
+  }
+  @if ($direction == 'all') {
+    border: 1PX solid $color;
+    border-radius: $radius;
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        position: relative;
+        border: none;
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 200%;
+          height: 200%;
+          border: 1PX solid $color;
+          border-radius: $radius * 2;
+          transform-origin: 0 0;
+          transform: scale(0.5);
+          box-sizing: border-box;
+          pointer-events: none;
+          // @media (min-resolution: 3dppx) {
+          //   width: 300%;
+          //   height: 300%;
+          //   border-radius: $radius * 3;
+          //   transform: scale(0.33);
+          // }
+        }
+      }
+    }
+  }
+}
+
+//底部1px 边框
+@mixin one-px-bottom($backgroundColor: #EEEFF3 ){
+  @include hairline('bottom', $backgroundColor);
+}
+
+//左边1 像素边框, 可配置top和高度
+@mixin hairline-left($top: auto, $height: 100%, $color: #EEEFF3){
+  border-left: 1PX solid $color;
+  html:not([data-scale]) & {
+    @media (min-resolution: 2dppx) {
+      position: relative;
+      border-left: none;
+      &::before {
+        @include scale-hairline-common($color, $top, auto, auto, 0);
+        width: 1PX;
+        height: $height;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+        @media (min-resolution: 3dppx) {
+          transform: scaleX(0.33);
+        }
+      }
+    }
+  }
+}
+
+//右边1 像素边框, 可配置top和高度
+@mixin hairline-right($top:auto, $height: 100%, $color: #EEEFF3){
+  border-right: 1PX solid $color;
+  html:not([data-scale]) & {
+    @media (min-resolution: 2dppx) {
+      position: relative;
+      border-right: none;
+      &::after {
+        @include scale-hairline-common($color, $top, 0, auto, auto);
+        width: 1PX;
+        height: $height;
+        background: $color;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+        @media (min-resolution: 3dppx) {
+          transform: scaleX(0.33);
+        }
+      }
+    }
+  }
+}
+
+@mixin one-px($color: #CACACA){
+  position: relative;
+  height: 1px;
+  &:after {
+    position: absolute;
+    z-index: 2;
+    content: "";
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    transform-origin: top left;
+    border: 0 solid $color;
+    border-bottom-width: 1px;
+    @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+      width: 150%;
+      height: 150%;
+      -webkit-transform: scale(.666666);
+      -ms-transform: scale(.666666);
+      transform: scale(.666666);
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      width: 200%;
+      height: 200%;
+      transform: scale(.5);
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      width: 300%;
+      height: 300%;
+      transform: scale(0.333333);
+    }
+  }
+}
+
+@mixin one-px-bottom-line($color: #CACACA ){
+  position: relative;
+  &:after{
+    position: absolute;
+    z-index: 2;
+    content: "";
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    transform-origin: top left;
+    border: 0 solid $color;
+    border-bottom-width: 1px;
+    @media screen and (-webkit-min-device-pixel-ratio: 1.5){
+      width: 150%;
+      height: 150%;
+      -webkit-transform: scale(.666666);
+      -ms-transform: scale(.666666);
+      transform: scale(.666666);
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 2){
+      width: 200%;
+      height: 200%;
+      transform: scale(.5);
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      width: 300%;
+      height: 300%;
+      transform: scale(0.333333);
+    }
+  }
+}
+
+

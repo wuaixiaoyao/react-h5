@@ -1,39 +1,38 @@
-import React from 'react';
+import React , { lazy , Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter  } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import ErrorBoundary from './errorBoundary'
+import Button from './baseUI/button'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { renderRoutes } from 'react-router-config';
+let fundebugRevideo = require('fundebug-revideo');
+const getWrapperComponent = (Component, fallback = null) => {//装饰路由组件
+  return  props => {
+    return (
+      <Suspense fallback={null}>
+        <Component {...props}/>
+      </Suspense>
+    );
+  };
+}
+const Home = getWrapperComponent(lazy(() => import('./pages/home/index')))
+const Child = getWrapperComponent(lazy(() => import('./pages/child/index')));
+const GrandChild = getWrapperComponent(lazy(() => import('./pages/grandChild/index')));
+
+
 const Root = ({ route }) => {
-  return <div>
-    <h1>Root</h1>
-    {renderRoutes(route.routes)}
-  </div>
+  return <ErrorBoundary>
+    <div>
+
+      <h1>根组件</h1>
+      <Button type={'primary'}>test</Button>
+      {renderRoutes(route.routes)}
+    </div>
+  </ErrorBoundary>
 }
 
-const Home = ({ route }) => (
-  <div>
-    <h2>我是Home页</h2>
-  </div>
-);
 
-const Child = ({ route }) => (
-  <div>
-    <h2>Child</h2>
-     child routes won't render without this
-    {renderRoutes(route.routes, { someProp: 'these extra props are optional' })}
-  </div>
-);
-
-const GrandChild = ( props ) => {//孙子组件
-  let { route ,someProp ,match ,location} = props;
-  let { params : { id }} = match;
-  debugger
-  return <div>
-    <h3>Grand Child id { id }</h3>
-    <div>{someProp}</div>
-  </div>
-};
 const routes = [
   {
     component: Root,
@@ -48,11 +47,7 @@ const routes = [
         component: Child,
         routes: [
           {
-            path: '/',
-            component: GrandChild
-          },
-          {
-            path: '/:id/grand-child',
+            path: '/child/:id',
             component: GrandChild
           }
         ]

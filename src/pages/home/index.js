@@ -4,12 +4,10 @@
  * @Description:
 */
 import React ,{Component} from 'react';
-export default class Home extends Component {
-  render () {
-    //
-    return <div>
-        home 页面
-
-    </div>
-  }
-}
+const Home = ({ route }) => (
+  //todo;待完善
+  <div>
+    <h2>我是Home组件</h2>
+  </div>
+);
+export default Home

@@ -4,12 +4,14 @@
  * @Description:子页面
 */
 import React ,{Component} from 'react';
-export default class Child extends Component {
-  render () {
-    //
-    return <div>
-        子页面
-
-    </div>
-  }
-}
+import { renderRoutes } from 'react-router-config'
+const GrandChild = ( props ) => {//孙子组件
+  let { route ,someProp ,match ,location} = props;
+  let { params : { id }} = match;
+  return <div>
+    <h3> 孙子组件 { id }</h3>
+    <div>{someProp}</div>
+    { renderRoutes(route.routes)}
+  </div>
+};
+export default GrandChild
