@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter  } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import ErrorBoundary from './errorBoundary'
+import StateExam from '@/components/example/state'
+
 import Button from './baseUI/button'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -24,7 +26,7 @@ const GrandChild = getWrapperComponent(lazy(() => import('./pages/grandChild/ind
 const Root = ({ route }) => {
   return <ErrorBoundary>
     <div>
-
+      <StateExam></StateExam>  
       <h1>根组件</h1>
       <Button type={'primary'}>test</Button>
       {renderRoutes(route.routes)}
