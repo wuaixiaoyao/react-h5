@@ -2,7 +2,7 @@
  * @Author: wuaixiaoyao 
  * @Date: 2020-03-10 12:13:52 
  * @Last Modified by: wuaixiaoyao
- * @Last Modified time: 2020-03-13 11:59:28
+ * @Last Modified time: 2020-03-23 16:34:48
  */
 import React from 'react'
 export default class StateExample extends React.Component {
@@ -29,7 +29,7 @@ export default class StateExample extends React.Component {
       console.log('---------this.state-----', this.state)// { val: 0}
       return state 
     })
-
+~
     this.setState({name: 'jji'}, () => {
       console.log('callbac state 不合并', this.state) // 回调log 100
     });
@@ -55,6 +55,8 @@ export default class StateExample extends React.Component {
   }
 
   render() {
+    console.log('-----render State 子组件 ')  
+
     return <React.Fragment>
       <button>state test</button>  
     </React.Fragment> ;

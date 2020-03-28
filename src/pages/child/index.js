@@ -5,6 +5,8 @@
 */
 import React ,{Component} from 'react';
 import { renderRoutes } from 'react-router-config'
+import EventLoop from '@/components/example/eventLoop'
+
 const Child = ({ route }) => {
   function loadRequest() {
     var oReq = new XMLHttpRequest();
@@ -13,6 +15,8 @@ const Child = ({ route }) => {
   }
   return  <div>
     <h2>子组件</h2>
+    <EventLoop></EventLoop>
+
     <h1>This is a test for HTTP request error !</h1>
     <button onClick={loadRequest}>Click</button>
     {renderRoutes(route.routes, { someProp: 'these extra props are optional' })}

@@ -4,7 +4,6 @@ import { BrowserRouter  } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import ErrorBoundary from './errorBoundary'
 import StateExam from '@/components/example/state'
-
 import Button from './baseUI/button'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
