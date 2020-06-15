@@ -7,7 +7,7 @@ import StateExam from '@/components/example/state'
 import Button from './baseUI/button'
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-let fundebugRevideo = require('fundebug-revideo');
+//let fundebugRevideo = require('fundebug-revideo');
 const getWrapperComponent = (Component, fallback = null) => {//装饰路由组件
   return  props => {
     return (
@@ -17,9 +17,13 @@ const getWrapperComponent = (Component, fallback = null) => {//装饰路由组�
     );
   };
 }
-const Home = getWrapperComponent(lazy(() => import('./pages/home/index')))
-const Child = getWrapperComponent(lazy(() => import('./pages/child/index')));
-const GrandChild = getWrapperComponent(lazy(() => import('./pages/grandChild/index')));
+// import 动态加载 拆分为chunk 文件 , 和 webpack 的require.ensure() 一样  
+const homePath = '/home/index';
+const Home = getWrapperComponent(lazy(() => import(`./pages${homePath}`)))
+const childPath = '/child/index';
+const Child = getWrapperComponent(lazy(() => import(`./pages${childPath}`)));
+const grandChildPath = '/grandChild/index';
+const GrandChild = getWrapperComponent(lazy(() => import(`./pages${grandChildPath}`)));
 
 
 const Root = ({ route }) => {
@@ -41,7 +45,7 @@ const routes = [
       {
         path: '/',
         exact: true,
-        component: Home
+        component: Home,
       },
       {
         path: '/child',
