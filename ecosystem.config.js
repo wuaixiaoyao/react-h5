@@ -3,8 +3,7 @@
  * @date 2019/10/25
  * @Description: pm2 配置文件
  */
-// pm2 start pm2.conf.json
-{
+module.exports = {
   "apps": {
     "name": "pm2-h5", // 起个进程名，即AppName
     "script": "app.js", // 启动的入口文件

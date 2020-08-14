@@ -80,7 +80,7 @@
     "clean": "rimraf ./build",
     "lint": "eslint --fix --ext .js,.jsx src config",
     "dev": "cross-env NODE_ENV=dev nodemon app.js",
-    "deploy": "cross-env NODE_ENV=production pm2 start pm2.conf.json"
+    "deploy": "cross-env NODE_ENV=production pm2 start"
   },
   "eslintConfig": {
     "extends": "react-app"
