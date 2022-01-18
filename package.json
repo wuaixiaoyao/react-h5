@@ -135,6 +135,7 @@
     ]
   },
   "devDependencies": {
+    "chalk": "^4.1.2",
     "cross-env": "^6.0.3",
     "fundebug-javascript": "^2.0.0",
     "fundebug-revideo": "^0.6.1",

@@ -7,12 +7,25 @@ const express = require('express');
 const path = require('path');
 const proxy = require('http-proxy-middleware');
 const compression = require('compression');
+const chalk = require('chalk');
 const app = express();
 const RUNTIME_ENV = process.env.RUNTIME_ENV || 'dev';
 const port = process.env.PORT || 4001;
 
 app.use(compression());
-app.use(express.static(path.join(__dirname, 'build')));
+// 基于http协议讲解Cache-Control在服务中的应用
+// https://zhuanlan.zhihu.com/p/43414403
+app.use((req, res, next) => {
+  // 将 index.html 设为 no-cache, 每次请求 都会检查是否更新
+  if (req.url == '/') {
+    res.setHeader('Cache-control', 'no-cache');
+  }
+  next();
+});
+app.use(express.static(path.join(__dirname, 'build'), {
+  etag: false,
+  maxAge: 1000 * 60 * 60 * 24 * 365 // 缓存一年
+}));
 
 const apiMaps = {
   // dev 开发
@@ -46,6 +59,5 @@ app.get('/*', function (req, res) {
 });
 
 app.listen(port);
-
-console.log('h5 project started');
-console.log('port:', port);
+console.log(chalk.greenBright('服务已开启:'));
+console.log(chalk.yellowBright(`http://localhost:${port}`));
