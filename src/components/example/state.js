@@ -29,7 +29,6 @@ export default class StateExample extends React.Component {
       console.log('---------this.state-----', this.state)// { val: 0}
       return state 
     })
-~
     this.setState({name: 'jji'}, () => {
       console.log('callbac state 不合并', this.state) // 回调log 100
     });
