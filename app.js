@@ -18,13 +18,13 @@ app.use(compression());
 app.use((req, res, next) => {
   // 将 index.html 设为 no-cache, 每次请求 都会检查是否更新
   if (req.url == '/') {
-    res.setHeader('Cache-control', 'no-cache');
+    // res.setHeader('Cache-control', 'no-cache');
   }
   next();
 });
 app.use(express.static(path.join(__dirname, 'build'), {
   etag: false,
-  maxAge: 1000 * 60 * 60 * 24 * 365 // 缓存一年
+  maxAge: 10 * 60 * 60 * 24 * 365 // 缓存一年
 }));
 
 const apiMaps = {
