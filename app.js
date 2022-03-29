@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'build'), {
   etag: false,
-  maxAge: 10 * 60 * 60 * 24 * 365 // 缓存一年
+  maxAge: 60 * 60 * 24 * 365 // 缓存一年
 }));
 
 const apiMaps = {
