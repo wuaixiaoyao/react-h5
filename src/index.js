@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 const getWrapperComponent = (Component, fallback = null) => {//装饰路由组件
   return  props => {
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={'加载中...'}>
         <Component {...props}/>
       </Suspense>
     );
