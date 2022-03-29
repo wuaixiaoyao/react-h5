@@ -54,5 +54,3 @@ fl
 
 docker ps |grep  $container_name
 echo "部署完毕"
-
-
