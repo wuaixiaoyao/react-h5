@@ -2,7 +2,7 @@
  * @Author: wuaixiaoyao 
  * @Date: 2020-03-10 12:13:52 
  * @Last Modified by: wuaixiaoyao
- * @Last Modified time: 2020-03-23 16:34:48
+ * @Last Modified time: 2020-04-06 17:50:01
  */
 import React from 'react'
 export default class StateExample extends React.Component {
@@ -11,11 +11,39 @@ export default class StateExample extends React.Component {
     super();
     this.state = {
       name: 'hah',
-      val: 0
+      val: 0,
+      value: 0
     };
   }
 
   componentDidMount() {
+
+    function a1() {
+      console.time('普通方式创建')
+      for (let i = 0; i < 5000; i++) {
+        let op = document.createElement('span');
+        let oText = document.createTextNode(i);
+        op.appendChild(oText);
+        document.body.appendChild(op);
+      }
+      console.timeEnd('普通方式创建')
+    }
+  
+    function a2() {
+      console.time('documentFragment创建')
+      let oFragmeng = document.createDocumentFragment(); //创建文档碎片
+      for (let i = 0; i < 5000; i++) {
+        let op = document.createElement('span');
+        let oText = document.createTextNode(i);
+        op.appendChild(oText);
+        oFragmeng.appendChild(op);
+      }
+      document.body.appendChild(oFragmeng); //最后一次性添加到document中
+      console.timeEnd('documentFragment创建')
+    }
+    a1();
+    a2();
+    
     /**
      * 异步： react apis （生命周期或者onCilck onChange等）中 setState 为异步，同时会将多个set操作合并
      * 由React控制的事件处理程序，以及生命周期函数调用setState不会同步更新state 。
@@ -51,6 +79,14 @@ export default class StateExample extends React.Component {
       this.setState({val: this.state.val + 1});
       console.log(this.state.val);  // 第 4 次 log 102
     }, 0);
+
+
+    this.setState(state => {
+      return {
+        value: state.value + 1
+      }
+    })
+
   }
 
   render() {
