@@ -50,7 +50,7 @@ if [ $? == 0 ];then
  docker rmi $(docker images -f "dangling=true" -q)
 else 
 echo '无需清理'
-fl
+fi
 
 docker ps |grep  $container_name
 echo "部署完毕"
