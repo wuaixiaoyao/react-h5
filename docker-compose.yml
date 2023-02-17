@@ -1,8 +1,7 @@
-version: "3"
+version: '3'
 services:
   fe_web:
     build: .
     ports:
-      - "4001:4001"
-   
+      - '6001:4001'
 # TODO: 完善
