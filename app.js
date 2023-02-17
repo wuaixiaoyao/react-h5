@@ -18,7 +18,7 @@ app.use(compression());
 // https://zhuanlan.zhihu.com/p/43414403
 app.use((req, res, next) => {
   // 将 index.html 设为 no-cache, 每次请求 都会检查是否更新
-  if (req.url == '/') {
+  if (req.url === '/') {
     // res.setHeader('Cache-control', 'no-cache');
   }
   next();

@@ -4,7 +4,7 @@ FROM node:14-alpine AS base
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-ENV PORT=3008 APP_PATH=/app RUN_TIME_ENV=prod
+ENV PORT=4001 APP_PATH=/app RUN_TIME_ENV=prod
 
 # 工作目录 app
 WORKDIR  $APP_PATH

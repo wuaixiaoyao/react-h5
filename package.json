@@ -134,10 +134,6 @@
       "web.jsx",
       "jsx",
       "node"
-    ],
-    "watchPlugins": [
-      "/Users/rrd/Evolut/admin/evolut-admin/node_modules/jest-watch-typeahead/filename.js",
-      "/Users/rrd/Evolut/admin/evolut-admin/node_modules/jest-watch-typeahead/testname.js"
     ]
   },
   "devDependencies": {
